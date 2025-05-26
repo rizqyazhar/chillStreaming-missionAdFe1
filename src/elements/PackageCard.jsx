@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const PackageCard = ({
   packageTitle,
   packagePrice,
@@ -32,10 +34,11 @@ const PackageCard = ({
       </div>
       <div className='border border-outlineBorder'></div>
       <div className='flex flex-col items-center gap-1'>
-        <button
+        <Link
+          to='/detail-purchase'
           className={`${buttonWidth} flex items-center rounded-full justify-center px-[26px] py-2.5 bg-light-primary text-primary-300 font-bold text-sm cursor-pointer`}>
           Langganan
-        </button>
+        </Link>
         <p className='text-light-primary font-normal text-xs'>
           Syarat dan Ketentuan Berlaku
         </p>

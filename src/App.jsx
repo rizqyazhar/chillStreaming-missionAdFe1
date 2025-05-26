@@ -9,6 +9,7 @@ import ProfilePage from "./pages/ProfilePage";
 import MembershipPage from "./pages/MembershipPage";
 import PurchasePage from "./pages/PurchasePage";
 import HomeLayout from "./layouts/HomeLayout";
+import PurchaseContent from "./fragments/membership/PurchaseContent";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -33,6 +34,7 @@ const App = () => {
         { path: "/profile", element: <ProfilePage /> },
         { path: "/membership", element: <MembershipPage /> },
         { path: "/purchase", element: <PurchasePage /> },
+        { path: "/detail-purchase", element: <PurchaseContent /> },
       ],
     },
   ]);

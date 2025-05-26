@@ -32,7 +32,7 @@ const LoginPage = () => {
             </Link>
           </p>
           <p className='text-white text-[10px] md:text-base cursor-pointer'>
-            <Link to='register'>Lupa kata sandi?</Link>
+            <Link to='/register'>Lupa kata sandi?</Link>
           </p>
         </div>
       </InputFields>
