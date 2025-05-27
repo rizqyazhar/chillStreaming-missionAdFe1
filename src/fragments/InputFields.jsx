@@ -8,11 +8,21 @@ const InputFields = ({
   htmlFor,
   labelText,
   children,
+  value,
+  name,
+  handleChange,
 }) => {
   return (
     <div className='relative flex flex-col gap-1 md:gap-1.5 w-full'>
       <Label htmlFor={htmlFor} labelText={labelText} />
-      <Input id={id} type={type} placeholder={placeholder} />
+      <Input
+        id={id}
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={handleChange}
+      />
       {children}
     </div>
   );
