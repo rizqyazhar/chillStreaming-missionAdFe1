@@ -8,7 +8,26 @@ const getUsers = () => {
         .catch(err => console.log(err))
 }
 
+const postUsers = () => {
+    axios.post(apiUrl, {
+        email: '',
+        username: '',
+        password: ''
+    })
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+}
+
+const updateUsers = () => {
+    axios.patch(apiUrl, {
+        username: '',
+        password: ''
+    })
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+}
+
 
 console.log("API URL dari Vite:", apiUrl);
 
-export { getUsers };
+export { getUsers, postUsers, updateUsers };

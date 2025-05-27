@@ -10,11 +10,17 @@ import MembershipPage from "./pages/MembershipPage";
 import PurchasePage from "./pages/PurchasePage";
 import HomeLayout from "./layouts/HomeLayout";
 import PurchaseContent from "./fragments/membership/PurchaseContent";
+import AuthLayout from "./layouts/AuthLayout";
 
 const App = () => {
   const router = createBrowserRouter([
-    { path: "/", element: <LoginPage /> },
-    { path: "/register", element: <RegisterPage /> },
+    {
+      element: <AuthLayout />,
+      children: [
+        { path: "/", element: <LoginPage /> },
+        { path: "/register", element: <RegisterPage /> },
+      ],
+    },
     {
       element: <HomeLayout />,
       children: [

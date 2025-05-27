@@ -7,7 +7,7 @@ import { BiSolidHide } from "react-icons/bi";
 
 const LoginPage = () => {
   return (
-    <AuthLayout title='Daftar' subTitle='Selamat Datang!' bgSrc='register'>
+    <>
       <InputFields
         id='username'
         type='text'
@@ -42,7 +42,7 @@ const LoginPage = () => {
         </div>
       </InputFields>
       <ButtonFields />
-    </AuthLayout>
+    </>
   );
 };
 

@@ -1,13 +1,11 @@
 import { Link } from "react-router-dom";
-import Button from "../elements/Button";
-import AuthLayout from "../layouts/AuthLayout";
 import ButtonFields from "../fragments/ButtonFields";
 import InputFields from "../fragments/InputFields";
 import { BiSolidHide } from "react-icons/bi";
 
 const LoginPage = () => {
   return (
-    <AuthLayout title='Masuk' subTitle='Selamat Datang Kembali!' bgSrc='login'>
+    <>
       <InputFields
         id='username'
         type='text'
@@ -37,7 +35,7 @@ const LoginPage = () => {
         </div>
       </InputFields>
       <ButtonFields />
-    </AuthLayout>
+    </>
   );
 };
 
