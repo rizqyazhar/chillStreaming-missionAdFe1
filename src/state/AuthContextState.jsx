@@ -1,10 +1,12 @@
 const apiUrl = import.meta.env.VITE_API_URL;
 import { createContext, useState } from "react";
 import useFetch from "../customHooks/useFetch";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [isLoginPage, setIsLoginPage] = useState(null);
   const { users, error, loading } = useFetch(apiUrl);
   const [userInput, setUserInput] = useState({
@@ -21,6 +23,9 @@ const AuthProvider = ({ children }) => {
     e.preventDefault();
     console.log(userInput.username);
     console.log(userInput.password);
+    if (userInput.username && userInput.password) {
+      navigate("/home");
+    }
     setUserInput({
       username: "",
       password: "",
