@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../state/AuthContextState";
 import { useLocation } from "react-router-dom";
 
@@ -17,11 +17,13 @@ const AuthContent = ({ children }) => {
     },
   ];
   const location = useLocation();
-  if (location.pathname !== "/register") {
-    setIsLoginPage(true);
-  } else {
-    setIsLoginPage(false);
-  }
+  useEffect(() => {
+    if (location.pathname !== "/register") {
+      setIsLoginPage(true);
+    } else {
+      setIsLoginPage(false);
+    }
+  }, [location.pathname, setIsLoginPage]);
 
   return (
     <>
