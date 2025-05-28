@@ -14,17 +14,38 @@ const AuthProvider = ({ children }) => {
     password: "",
   });
 
+  const usernameMatch = users.find(
+    (user) => user.username === userInput.username
+  );
+  const passwordMatch = users.find(
+    (user) => user.password === userInput.password
+  );
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserInput((prev) => ({ ...prev, [name]: value }));
   };
 
+  const [messageAfterLogin, setMessageAfterLogin] = useState(null);
+  const [message, setMessage] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(userInput.username);
     console.log(userInput.password);
-    if (userInput.username && userInput.password) {
-      navigate("/home");
+    if (usernameMatch && passwordMatch) {
+      setMessage(true);
+      setMessageAfterLogin(true);
+      setTimeout(() => {
+        navigate("/home");
+      }, 1500);
+    } else {
+      setMessage(true);
+      setMessageAfterLogin(false);
+      setTimeout(() => {
+        setMessage(false);
+      }, 1500);
+      console.log("username dan password anda salah");
     }
     setUserInput({
       username: "",
@@ -56,6 +77,8 @@ const AuthProvider = ({ children }) => {
         userInput,
         handleChange,
         handleSubmit,
+        messageAfterLogin,
+        message,
       }}>
       {children}
     </AuthContext.Provider>
