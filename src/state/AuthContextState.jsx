@@ -3,6 +3,7 @@ import { createContext, useState } from "react";
 import useFetch from "../customHooks/useFetch";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { postUsers } from "../services/api";
 
 const AuthContext = createContext();
 
@@ -65,12 +66,33 @@ const AuthProvider = ({ children }) => {
       }, 1500);
       console.log("username dan password anda salah");
     }
-    setUserInput({
+    setUserInput((prev) => ({
+      ...prev,
       login: {
         username: "",
         password: "",
       },
-    });
+    }));
+  };
+  const handleRegisterSubmit = (e) => {
+    e.preventDefault();
+    if (userInput.register.password !== userInput.register.confirmPassword)
+      return console.log("unmatch");
+    const postData = {
+      email: userInput.register.email,
+      username: userInput.register.username,
+      password: userInput.register.password,
+    };
+    console.log(postData);
+    setUserInput((prev) => ({
+      ...prev,
+      register: {
+        email: "",
+        username: "",
+        password: "",
+        confirmPassword: "",
+      },
+    }));
   };
 
   if (loading) {
@@ -102,6 +124,7 @@ const AuthProvider = ({ children }) => {
         handleLoginChange,
         handleRegisterChange,
         handleLoginSubmit,
+        handleRegisterSubmit,
         messageAfterLogin,
         message,
       }}>

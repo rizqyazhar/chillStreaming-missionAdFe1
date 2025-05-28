@@ -4,13 +4,8 @@ import { useLocation } from "react-router-dom";
 import PopupMessage from "./popupMessage/PopupMessage";
 
 const AuthContent = ({ children }) => {
-  const {
-    isLoginPage,
-    setIsLoginPage,
-    handleSubmit,
-    messageAfterLogin,
-    message,
-  } = useContext(AuthContext);
+  const { isLoginPage, setIsLoginPage, messageAfterLogin, message } =
+    useContext(AuthContext);
   const propText = [
     {
       title: "Masuk",
@@ -63,11 +58,7 @@ const AuthContent = ({ children }) => {
                 {isLoginPage ? propText[0].subTitle : propText[1].subTitle}
               </p>
             </div>
-            <form
-              className='w-full flex flex-col justify-center items-center gap-5 md:gap-[37px]'
-              onSubmit={handleSubmit}>
-              {children}
-            </form>
+            {children}
           </div>
         </div>
       </div>
