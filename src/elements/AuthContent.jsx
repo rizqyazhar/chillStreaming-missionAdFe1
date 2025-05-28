@@ -4,8 +4,13 @@ import { useLocation } from "react-router-dom";
 import PopupMessage from "./popupMessage/PopupMessage";
 
 const AuthContent = ({ children }) => {
-  const { isLoginPage, setIsLoginPage, messageAfterLogin, message } =
-    useContext(AuthContext);
+  const {
+    isLoginPage,
+    setIsLoginPage,
+    messageAfterLogin,
+    message,
+    fillMessage,
+  } = useContext(AuthContext);
   const propText = [
     {
       title: "Masuk",
@@ -40,7 +45,9 @@ const AuthContent = ({ children }) => {
         {message && (
           <PopupMessage
             text={
-              messageAfterLogin ? "Login berhasil!" : "Login tidak berhasil!"
+              messageAfterLogin
+                ? `${fillMessage ? "Login" : "Register"} successful!`
+                : `${fillMessage ? "Login" : "Register"} failed!`
             }
           />
         )}

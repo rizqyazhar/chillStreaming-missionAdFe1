@@ -40,8 +40,10 @@ const AuthProvider = ({ children }) => {
     }));
   };
 
-  const [messageAfterLogin, setMessageAfterLogin] = useState(null);
+  const [messageAfterLogin, setMessageAfterLogin] = useState(false);
   const [message, setMessage] = useState(false);
+  const [iconForAuth, setIconForAuth] = useState(false);
+  const [fillMessage, setFillMessage] = useState(false);
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
@@ -56,12 +58,16 @@ const AuthProvider = ({ children }) => {
     if (usernameMatch && passwordMatch) {
       setMessage(true);
       setMessageAfterLogin(true);
+      setFillMessage(true);
+      setIconForAuth(true);
       setTimeout(() => {
         navigate("/home");
       }, 1500);
     } else {
       setMessage(true);
       setMessageAfterLogin(false);
+      setFillMessage(true);
+      setIconForAuth(true);
       setTimeout(() => {
         setMessage(false);
       }, 1500);
@@ -93,9 +99,19 @@ const AuthProvider = ({ children }) => {
       postUsers(apiUrl, postData);
       console.log(emailMatch);
       console.log("added");
+      setMessage(true);
+      setMessageAfterLogin(true);
+      setFillMessage(false);
+      setIconForAuth(true);
       setTimeout(() => {
+        setMessage(false);
         navigate("/");
       }, 2000);
+    } else {
+      setMessage(true);
+      setMessageAfterLogin(false);
+      setFillMessage(false);
+      setIconForAuth(false);
     }
     setUserInput((prev) => ({
       ...prev,
@@ -140,6 +156,8 @@ const AuthProvider = ({ children }) => {
         handleRegisterSubmit,
         messageAfterLogin,
         message,
+        iconForAuth,
+        fillMessage,
       }}>
       {children}
     </AuthContext.Provider>
