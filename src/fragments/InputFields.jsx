@@ -10,7 +10,7 @@ const InputFields = ({
   children,
   value,
   name,
-  handleChange,
+  onChange,
 }) => {
   return (
     <div className='relative flex flex-col gap-1 md:gap-1.5 w-full'>
@@ -21,7 +21,7 @@ const InputFields = ({
         type={type}
         placeholder={placeholder}
         value={value}
-        onChange={handleChange}
+        onChange={onChange}
       />
       {children}
     </div>

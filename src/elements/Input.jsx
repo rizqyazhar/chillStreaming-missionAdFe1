@@ -1,9 +1,4 @@
-import { AuthContext } from "../state/AuthContextState";
-import { useContext } from "react";
-
-const Input = ({ id, type, placeholder, value, name }) => {
-  const { handleChange } = useContext(AuthContext);
-
+const Input = ({ id, type, placeholder, value, name, onChange }) => {
   return (
     <input
       id={id}
@@ -12,7 +7,7 @@ const Input = ({ id, type, placeholder, value, name }) => {
       className='px-3 md:px-5 py-2 md:py-3.5 border border-outlineBorder outline-none rounded-3xl text-light-secondary text-[9px] md:text-[16px] placeholder:text-light-secondary placeholder:font-lato'
       placeholder={placeholder}
       value={value}
-      onChange={handleChange}
+      onChange={onChange}
       autoComplete='off'
       required
     />
