@@ -25,15 +25,25 @@ const AuthProvider = ({ children }) => {
   });
 
   const usernameMatch = users.find(
-    (user) => user.username === userInput.username
+    (user) => user.username === userInput.login.username
   );
   const passwordMatch = users.find(
-    (user) => user.password === userInput.password
+    (user) => user.password === userInput.login.password
   );
 
-  const handleChange = (e) => {
+  const handleLoginChange = (e) => {
     const { name, value } = e.target;
-    setUserInput((prev) => ({ ...prev, [name]: value }));
+    setUserInput((prev) => ({
+      ...prev,
+      login: { ...prev.login, [name]: value },
+    }));
+  };
+  const handleRegisterChange = (e) => {
+    const { name, value } = e.target;
+    setUserInput((prev) => ({
+      ...prev,
+      register: { ...prev.register, [name]: value },
+    }));
   };
 
   const [messageAfterLogin, setMessageAfterLogin] = useState(null);
@@ -56,8 +66,10 @@ const AuthProvider = ({ children }) => {
       console.log("username dan password anda salah");
     }
     setUserInput({
-      username: "",
-      password: "",
+      login: {
+        username: "",
+        password: "",
+      },
     });
   };
 
@@ -87,7 +99,8 @@ const AuthProvider = ({ children }) => {
         setIsLoginPage,
         users,
         userInput,
-        handleChange,
+        handleLoginChange,
+        handleRegisterChange,
         handleSubmit,
         messageAfterLogin,
         message,

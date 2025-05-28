@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { AuthContext } from "../state/AuthContextState";
 
 const LoginPage = () => {
-  const { userInput, handleChange } = useContext(AuthContext);
+  const { userInput, handleLoginChange } = useContext(AuthContext);
   return (
     <>
       <InputFields
@@ -17,7 +17,7 @@ const LoginPage = () => {
         htmlFor='username'
         labelText='Username'
         value={userInput.login.username}
-        onChange={handleChange}
+        onChange={handleLoginChange}
       />
       <InputFields
         id='password'
@@ -27,7 +27,7 @@ const LoginPage = () => {
         htmlFor='password'
         labelText='Kata Sandi'
         value={userInput.login.password}
-        onChange={handleChange}>
+        onChange={handleLoginChange}>
         <BiSolidHide className='absolute top-[29px] md:top-[50px] right-3 md:right-5 text-xs md:text-2xl text-light-disabled cursor-pointer' />
         <div className='w-full flex justify-between font-lato mt-1.5'>
           <p className='text-light-secondary text-[10px] md:text-base tracking-[.2px] cursor-default'>
