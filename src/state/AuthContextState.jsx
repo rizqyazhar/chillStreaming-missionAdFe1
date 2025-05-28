@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
   const [messageAfterLogin, setMessageAfterLogin] = useState(null);
   const [message, setMessage] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleLoginSubmit = (e) => {
     e.preventDefault();
     if (usernameMatch && passwordMatch) {
       setMessage(true);
@@ -101,7 +101,7 @@ const AuthProvider = ({ children }) => {
         userInput,
         handleLoginChange,
         handleRegisterChange,
-        handleSubmit,
+        handleLoginSubmit,
         messageAfterLogin,
         message,
       }}>

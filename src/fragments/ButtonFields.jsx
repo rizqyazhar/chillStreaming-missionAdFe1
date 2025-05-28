@@ -1,9 +1,9 @@
 import Button from "../elements/Button";
 
-const ButtonFields = () => {
+const ButtonFields = ({ text }) => {
   return (
     <div className='w-full flex flex-col items-center'>
-      <Button buttonText='Masuk' />
+      <Button buttonText={text} />
       <p className='font-lato tracking-[.2px] text-light-secondary text-[10px] md:text-sm my-2  cursor-default'>
         Atau
       </p>

@@ -43,7 +43,7 @@ const LoginPage = () => {
           </p>
         </div>
       </InputFields>
-      <ButtonFields />
+      <ButtonFields text='Masuk' />
     </>
   );
 };

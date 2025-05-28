@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { AuthContext } from "../state/AuthContextState";
 
 const LoginPage = () => {
-  const { userInput, handleChange } = useContext(AuthContext);
+  const { userInput, handleRegisterChange } = useContext(AuthContext);
 
   return (
     <>
@@ -20,7 +20,7 @@ const LoginPage = () => {
         htmlFor='username'
         labelText='Email'
         value={userInput.register.email}
-        onChange={handleChange}
+        onChange={handleRegisterChange}
       />
       <InputFields
         id='username'
@@ -30,7 +30,7 @@ const LoginPage = () => {
         htmlFor='username'
         labelText='Username'
         value={userInput.register.username}
-        onChange={handleChange}
+        onChange={handleRegisterChange}
       />
       <InputFields
         id='password'
@@ -40,7 +40,7 @@ const LoginPage = () => {
         htmlFor='password'
         labelText='Kata Sandi'
         value={userInput.register.password}
-        onChange={handleChange}>
+        onChange={handleRegisterChange}>
         <BiSolidHide className='absolute top-7 md:top-[50px] right-3 md:right-5 text-xs md:text-2xl text-light-disabled cursor-pointer' />
       </InputFields>
       <InputFields
@@ -51,7 +51,7 @@ const LoginPage = () => {
         htmlFor='password'
         labelText='Konfirmasi Kata Sandi'
         value={userInput.register.confirmPassword}
-        onChange={handleChange}>
+        onChange={handleRegisterChange}>
         <BiSolidHide className='absolute top-[29px] md:top-[50px] right-3 md:right-5 text-xs md:text-2xl text-light-disabled cursor-pointer' />
         <div className='w-full flex justify-between font-lato mt-1.5'>
           <p className='text-light-secondary text-[10px] md:text-base tracking-[.2px] cursor-default'>
@@ -64,7 +64,7 @@ const LoginPage = () => {
           </p>
         </div>
       </InputFields>
-      <ButtonFields />
+      <ButtonFields text='Daftar' />
     </>
   );
 };
