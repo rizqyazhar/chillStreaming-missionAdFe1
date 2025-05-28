@@ -45,7 +45,7 @@ const ProfilePage = () => {
                 className='w-full flex flex-col border border-outlineBorder rounded-lg text-sm md:text-base px-4 py-2 bg-paperBackground text-light-disabled'>
                 Email
                 <input
-                  type='text'
+                  type='email'
                   name='emailProfile'
                   id='emailProfile'
                   className='outline-none text-light-primary text-base md:text-lg font-medium font-lato'
@@ -56,7 +56,7 @@ const ProfilePage = () => {
                 className='w-full flex flex-col border border-outlineBorder rounded-lg text-sm md:text-base px-4 py-2 bg-paperBackground text-light-disabled'>
                 Kata Sandi
                 <input
-                  type='text'
+                  type='password'
                   name='passwordProfile'
                   id='passwordProfile'
                   className='outline-none text-light-primary text-base md:text-lg font-medium font-lato'
