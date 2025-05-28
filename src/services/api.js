@@ -21,14 +21,16 @@ const postUsers = async (postData) => {
     }
 }
 
-const updateUsers = (url) => {
-    axios.patch(url, {
-        username: '',
-        password: ''
-    })
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
+const updateUsers = async (url, updatedData) => {
+    try {
+        const response = await axios.patch(url, updatedData);
+        return response;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
 }
+
 
 
 export { getUsers, postUsers, updateUsers };

@@ -1,9 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 import { getUsers } from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
+
   const [isLoginPage, setIsLoginPage] = useState(null);
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
@@ -57,6 +60,41 @@ const AuthProvider = ({ children }) => {
   const [fillMessage, setFillMessage] = useState(false);
   const [matchCheck, setMatchCheck] = useState(false);
 
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+
+    const matchUserLogin = users.some(
+      (user) =>
+        user.username === userInput.login.username &&
+        user.password === userInput.login.password
+    );
+
+    if (matchUserLogin) {
+      setMessage(true);
+      setMessageAfterLogin(true);
+      setFillMessage(true);
+      setIconForAuth(true);
+      setTimeout(() => {
+        navigate("/home");
+      }, 100);
+    } else {
+      setMessage(true);
+      setMessageAfterLogin(false);
+      setFillMessage(true);
+      setIconForAuth(true);
+      setTimeout(() => {
+        setMessage(false);
+      }, 1000);
+    }
+    setUserInput((prev) => ({
+      ...prev,
+      login: {
+        username: "",
+        password: "",
+      },
+    }));
+  };
+
   if (loading) {
     return (
       <>
@@ -90,11 +128,7 @@ const AuthProvider = ({ children }) => {
         message,
         iconForAuth,
         fillMessage,
-        setMessageAfterLogin,
-        setMessage,
-        setIconForAuth,
-        setFillMessage,
-        setUserInput,
+        handleLoginSubmit,
         matchCheck,
         setMatchCheck,
       }}>
