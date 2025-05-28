@@ -84,12 +84,19 @@ const AuthProvider = ({ children }) => {
       username: userInput.register.username,
       password: userInput.register.password,
     };
-    console.log(postData);
-    postUsers(apiUrl, postData);
-    const emailMatch = users.find(
-      (user) => user.email !== userInput.register.email
+    const emailMatch = users.some(
+      (user) => user.email === userInput.register.email
     );
-    if (!emailMatch) return console.log("yes");
+    console.log(postData);
+    console.log(emailMatch);
+    if (!emailMatch) {
+      postUsers(apiUrl, postData);
+      console.log(emailMatch);
+      console.log("added");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    }
     setUserInput((prev) => ({
       ...prev,
       register: {
