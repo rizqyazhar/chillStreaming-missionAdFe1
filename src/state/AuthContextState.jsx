@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { getUsers } from "../services/api";
+import { getUsers, postUsers } from "../services/api";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -110,6 +110,68 @@ const AuthProvider = ({ children }) => {
     );
   }
 
+  const handleRegisterSubmit = async (e) => {
+    e.preventDefault();
+    if (userInput.register.password !== userInput.register.confirmPassword) {
+      setMatchCheck(true);
+      setUserInput((prev) => ({
+        ...prev,
+        register: {
+          email: "",
+          username: "",
+          password: "",
+          confirmPassword: "",
+        },
+      }));
+      setTimeout(() => {
+        setMatchCheck(false);
+      }, 1000);
+    } else {
+      const postData = {
+        email: userInput.register.email,
+        username: userInput.register.username,
+        password: userInput.register.password,
+      };
+      const emailMatch = users.some(
+        (user) => user.email === userInput.register.email
+      );
+      setUserInput((prev) => ({
+        ...prev,
+        register: {
+          email: "",
+          username: "",
+          password: "",
+          confirmPassword: "",
+        },
+      }));
+      if (!emailMatch) {
+        setMessage(true);
+        setMessageAfterLogin(true);
+        setFillMessage(false);
+        setIconForAuth(true);
+        try {
+          const newUser = await postUsers(postData);
+          setUsers((prev) => [...prev, newUser]);
+
+          setTimeout(() => {
+            setMessage(false);
+            navigate("/");
+          }, 500);
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        setMessage(true);
+        setMessageAfterLogin(false);
+        setFillMessage(false);
+        setIconForAuth(false);
+        setTimeout(() => {
+          setMessage(false);
+        }, 1000);
+      }
+    }
+  };
+
   if (error) {
     return <h1>{error}</h1>;
   }
@@ -129,6 +191,7 @@ const AuthProvider = ({ children }) => {
         iconForAuth,
         fillMessage,
         handleLoginSubmit,
+        handleRegisterSubmit,
         matchCheck,
         setMatchCheck,
       }}>

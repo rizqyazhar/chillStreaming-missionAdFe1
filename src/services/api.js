@@ -24,7 +24,8 @@ const postUsers = async (postData) => {
 const updateUsers = async (url, updatedData) => {
     try {
         const response = await axios.patch(url, updatedData);
-        return response;
+        console.log(response.data);
+        return response.data;
     } catch (err) {
         console.log(err);
         throw err;
