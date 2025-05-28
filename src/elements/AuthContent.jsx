@@ -5,11 +5,12 @@ import PopupMessage from "./popupMessage/PopupMessage";
 
 const AuthContent = ({ children }) => {
   const {
-    isLoginPage,
     setIsLoginPage,
+    isLoginPage,
     messageAfterLogin,
     message,
     fillMessage,
+    matchCheck,
   } = useContext(AuthContext);
   const propText = [
     {
@@ -51,6 +52,7 @@ const AuthContent = ({ children }) => {
             }
           />
         )}
+        {matchCheck && <PopupMessage text='Password Unmatch!' />}
         <div className='container relative z-10 py-44 flex justify-center items-center'>
           <div className='flex flex-col justify-center items-center gap-5 md:gap-[37px] rounded-2xl bg-pageHeaderBackground/85 w-[306px] md:w-[529px] p-10'>
             <div>

@@ -1,9 +1,19 @@
 import axios from "axios";
+const url = import.meta.env.VITE_API_URL;
 
-const postUsers = async (url, postData) => {
+const getUsers = async () => {
     try {
-        const response = await axios.post(url, postData)
-        console.log(response.data)
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        console.log('GET: ', error)
+        throw error;
+    }
+}
+
+const postUsers = async (postData) => {
+    try {
+        const response = await axios.post(url, postData);
         return response.data;
     } catch (error) {
         console.log('POST: ', error)
@@ -21,4 +31,4 @@ const updateUsers = (url) => {
 }
 
 
-export { postUsers, updateUsers };
+export { getUsers, postUsers, updateUsers };

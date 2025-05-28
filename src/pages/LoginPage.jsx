@@ -4,10 +4,56 @@ import InputFields from "../fragments/InputFields";
 import { BiSolidHide } from "react-icons/bi";
 import { useContext } from "react";
 import { AuthContext } from "../state/AuthContextState";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const { userInput, handleLoginChange, handleLoginSubmit } =
-    useContext(AuthContext);
+  const {
+    users,
+    userInput,
+    handleLoginChange,
+    setMessageAfterLogin,
+    setMessage,
+    setIconForAuth,
+    setFillMessage,
+    setUserInput,
+  } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+
+    const matchUserLogin = users.some(
+      (user) =>
+        user.username === userInput.login.username &&
+        user.password === userInput.login.password
+    );
+
+    if (matchUserLogin) {
+      setMessage(true);
+      setMessageAfterLogin(true);
+      setFillMessage(true);
+      setIconForAuth(true);
+      setTimeout(() => {
+        navigate("/home");
+      }, 100);
+    } else {
+      setMessage(true);
+      setMessageAfterLogin(false);
+      setFillMessage(true);
+      setIconForAuth(true);
+      setTimeout(() => {
+        setMessage(false);
+      }, 1000);
+    }
+    setUserInput((prev) => ({
+      ...prev,
+      login: {
+        username: "",
+        password: "",
+      },
+    }));
+  };
   return (
     <>
       <form
