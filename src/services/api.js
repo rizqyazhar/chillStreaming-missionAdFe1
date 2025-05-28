@@ -3,6 +3,7 @@ import axios from "axios";
 const postUsers = async (url, postData) => {
     try {
         const response = await axios.post(url, postData)
+        console.log(response.data)
         return response.data;
     } catch (error) {
         console.log('POST: ', error)

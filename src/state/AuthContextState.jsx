@@ -25,13 +25,6 @@ const AuthProvider = ({ children }) => {
     },
   });
 
-  const usernameMatch = users.find(
-    (user) => user.username === userInput.login.username
-  );
-  const passwordMatch = users.find(
-    (user) => user.password === userInput.login.password
-  );
-
   const handleLoginChange = (e) => {
     const { name, value } = e.target;
     setUserInput((prev) => ({
@@ -52,6 +45,14 @@ const AuthProvider = ({ children }) => {
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
+
+    const usernameMatch = users.some(
+      (user) => user.username === userInput.login.username
+    );
+    const passwordMatch = users.some(
+      (user) => user.password === userInput.login.password
+    );
+
     if (usernameMatch && passwordMatch) {
       setMessage(true);
       setMessageAfterLogin(true);
@@ -84,6 +85,11 @@ const AuthProvider = ({ children }) => {
       password: userInput.register.password,
     };
     console.log(postData);
+    postUsers(apiUrl, postData);
+    const emailMatch = users.find(
+      (user) => user.email !== userInput.register.email
+    );
+    if (!emailMatch) return console.log("yes");
     setUserInput((prev) => ({
       ...prev,
       register: {
