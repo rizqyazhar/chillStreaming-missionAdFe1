@@ -28,7 +28,6 @@ const AuthProvider = ({ children }) => {
   const [iconForAuth, setIconForAuth] = useState(false);
   const [fillMessage, setFillMessage] = useState(false);
   const [matchCheck, setMatchCheck] = useState(false);
-  const [userIdRecord, setUserIdRecord] = useState("");
 
   useEffect(() => {
     setLoading(true);
@@ -73,7 +72,7 @@ const AuthProvider = ({ children }) => {
       const record = users.find(
         (user) => user.username === userInput.login.username
       );
-      setUserIdRecord(record.id);
+      sessionStorage.setItem("id", record.id);
       setMessage(true);
       setMessageAfterLogin(true);
       setFillMessage(true);
@@ -107,14 +106,7 @@ const AuthProvider = ({ children }) => {
 
   const handleUpdateProfileSubmit = (e) => {
     e.preventDefault();
-
-    const findUserLoginRecord = users.find(
-      (user) => user.username === userIdRecord
-    );
-
-    console.log(userIdRecord);
-
-    console.log(findUserLoginRecord);
+    console.log(sessionStorage.getItem("id"));
 
     // const findId = () => {
     //   if (findUserLoginRecord) {

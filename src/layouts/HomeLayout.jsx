@@ -3,14 +3,17 @@ import { ListProvider } from "../state/ContextState";
 import Navbar from "../fragments/Navbar";
 import Footer from "../fragments/Footer";
 import GenreTab from "../fragments/genre/GenreTab";
+import { AuthProvider } from "../state/AuthContextState";
 
 const HomeLayout = () => {
   return (
-    <ListProvider>
-      <Navbar genreTab={<GenreTab width='100px' />} />
-      <Outlet />
-      <Footer />
-    </ListProvider>
+    <AuthProvider>
+      <ListProvider>
+        <Navbar genreTab={<GenreTab width='100px' />} />
+        <Outlet />
+        <Footer />
+      </ListProvider>
+    </AuthProvider>
   );
 };
 

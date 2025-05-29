@@ -1,8 +1,11 @@
 import SeeAll from "../elements/SeeAll";
 import Content from "../fragments/Content";
 import Mylist from "../fragments/Mylist";
+import { useContext } from "react";
+import { AuthContext } from "../state/AuthContextState";
 
 const ProfilePage = () => {
+  const { handleUpdateProfileSubmit } = useContext(AuthContext);
   return (
     <>
       <Content>
@@ -30,8 +33,7 @@ const ProfilePage = () => {
             </div>
             <form
               className='flex flex-col gap-8 items-start'
-              // onSubmit={handleUpdateProfile}
-            >
+              onSubmit={handleUpdateProfileSubmit}>
               <label
                 htmlFor='usernameProfile'
                 className='w-full flex flex-col border border-outlineBorder rounded-lg text-sm md:text-base px-4 py-2 bg-paperBackground text-light-disabled'>
