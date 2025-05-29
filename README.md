@@ -1,3 +1,12 @@
+untuk login perlu daftar atau pakai user yang tersedia:
+
+username: admin
+password: admin123
+
+untuk update dan delete profile belum bisa, karena ga tau cara hubungin data pas login biar bisa dipake di profile page.
+
+state global sementara ini pake useContext.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
