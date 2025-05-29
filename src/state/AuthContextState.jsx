@@ -69,10 +69,6 @@ const AuthProvider = ({ children }) => {
     );
 
     if (matchUserLogin) {
-      const record = users.find(
-        (user) => user.username === userInput.login.username
-      );
-      sessionStorage.setItem("id", record.id);
       setMessage(true);
       setMessageAfterLogin(true);
       setFillMessage(true);
@@ -99,43 +95,10 @@ const AuthProvider = ({ children }) => {
     }));
   };
 
-  // const handleUpdateInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setUpdateProfile((prev) => ({ ...prev, [name]: value }));
-  // };
-
-  const handleUpdateProfileSubmit = (e) => {
-    e.preventDefault();
-    console.log(sessionStorage.getItem("id"));
-
-    // const findId = () => {
-    //   if (findUserLoginRecord) {
-
-    //   }
-    // }
-
-    // const updatedData = {
-    //   usernameUpdated: updateProfile.usernameProfile,
-    //   passwordUpdated: updateProfile.passwordProfile,
-    // };
-    // try {
-    //   await updateUsers(updatedData);
-    // } catch (err) {
-    //   console.error(err);
-    // }
-  };
-
   if (loading) {
     return (
       <>
-        <div
-          style={{
-            backgroundImage: `url('/img/bg-img/bg-${
-              location.pathname === "/" ? "login" : "register"
-            }.jpg')`,
-          }}
-          className='inset-0 min-h-screen bg-cover bg-center flex justify-center items-center'></div>
-        <div className='absolute inset-0 bg-black/30'></div>
+        <div className='inset-0 min-h-screen bg-pageHeaderBackground flex justify-center items-center'></div>
       </>
     );
   }
@@ -159,7 +122,6 @@ const AuthProvider = ({ children }) => {
         iconForAuth,
         fillMessage,
         handleLoginSubmit,
-        handleUpdateProfileSubmit,
         matchCheck,
         setMatchCheck,
         setMessage,

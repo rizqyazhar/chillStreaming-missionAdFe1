@@ -1,11 +1,8 @@
 import SeeAll from "../elements/SeeAll";
 import Content from "../fragments/Content";
 import Mylist from "../fragments/Mylist";
-import { useContext } from "react";
-import { AuthContext } from "../state/AuthContextState";
 
 const ProfilePage = () => {
-  const { handleUpdateProfileSubmit } = useContext(AuthContext);
   return (
     <>
       <Content>
@@ -31,9 +28,7 @@ const ProfilePage = () => {
                 </p>
               </div>
             </div>
-            <form
-              className='flex flex-col gap-8 items-start'
-              onSubmit={handleUpdateProfileSubmit}>
+            <form className='flex flex-col gap-8 items-start'>
               <label
                 htmlFor='usernameProfile'
                 className='w-full flex flex-col border border-outlineBorder rounded-lg text-sm md:text-base px-4 py-2 bg-paperBackground text-light-disabled'>
@@ -42,6 +37,7 @@ const ProfilePage = () => {
                   type='text'
                   name='usernameProfile'
                   id='usernameProfile'
+                  autoComplete='off'
                   className='outline-none text-light-primary text-base md:text-lg font-medium font-lato'
                 />
               </label>
@@ -53,6 +49,7 @@ const ProfilePage = () => {
                   type='email'
                   name='emailProfile'
                   id='emailProfile'
+                  disabled
                   className='outline-none text-light-primary text-base md:text-lg font-medium font-lato'
                 />
               </label>
@@ -64,6 +61,7 @@ const ProfilePage = () => {
                   type='password'
                   name='passwordProfile'
                   id='passwordProfile'
+                  autoComplete='off'
                   className='outline-none text-light-primary text-base md:text-lg font-medium font-lato'
                 />
               </label>

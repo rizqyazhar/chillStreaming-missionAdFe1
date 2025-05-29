@@ -21,9 +21,20 @@ const postUsers = async (postData) => {
     }
 }
 
-const updateUsers = async (url, updatedData) => {
+const updateUsers = async (id, updatedData) => {
     try {
-        const response = await axios.patch(url, updatedData);
+        const response = await axios.patch(`${url}/${id}`, updatedData);
+        console.log(response.data);
+        return response.data;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+}
+
+const deleteUsers = async (id) => {
+    try {
+        const response = await axios.delete(`${url}/${id}`)
         console.log(response.data);
         return response.data;
     } catch (err) {
@@ -34,4 +45,4 @@ const updateUsers = async (url, updatedData) => {
 
 
 
-export { getUsers, postUsers, updateUsers };
+export { getUsers, postUsers, updateUsers, deleteUsers };
