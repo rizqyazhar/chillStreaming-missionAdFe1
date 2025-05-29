@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { getUsers, postUsers } from "../services/api";
+import { getUsers } from "../services/api";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -23,6 +23,12 @@ const AuthProvider = ({ children }) => {
       confirmPassword: "",
     },
   });
+  const [messageAfterLogin, setMessageAfterLogin] = useState(false);
+  const [message, setMessage] = useState(false);
+  const [iconForAuth, setIconForAuth] = useState(false);
+  const [fillMessage, setFillMessage] = useState(false);
+  const [matchCheck, setMatchCheck] = useState(false);
+  const [userIdRecord, setUserIdRecord] = useState("");
 
   useEffect(() => {
     setLoading(true);
@@ -54,12 +60,6 @@ const AuthProvider = ({ children }) => {
     }));
   };
 
-  const [messageAfterLogin, setMessageAfterLogin] = useState(false);
-  const [message, setMessage] = useState(false);
-  const [iconForAuth, setIconForAuth] = useState(false);
-  const [fillMessage, setFillMessage] = useState(false);
-  const [matchCheck, setMatchCheck] = useState(false);
-
   const handleLoginSubmit = (e) => {
     e.preventDefault();
 
@@ -70,6 +70,10 @@ const AuthProvider = ({ children }) => {
     );
 
     if (matchUserLogin) {
+      const record = users.find(
+        (user) => user.username === userInput.login.username
+      );
+      setUserIdRecord(record.id);
       setMessage(true);
       setMessageAfterLogin(true);
       setFillMessage(true);
@@ -86,6 +90,7 @@ const AuthProvider = ({ children }) => {
         setMessage(false);
       }, 1000);
     }
+
     setUserInput((prev) => ({
       ...prev,
       login: {
@@ -93,6 +98,39 @@ const AuthProvider = ({ children }) => {
         password: "",
       },
     }));
+  };
+
+  // const handleUpdateInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setUpdateProfile((prev) => ({ ...prev, [name]: value }));
+  // };
+
+  const handleUpdateProfileSubmit = (e) => {
+    e.preventDefault();
+
+    const findUserLoginRecord = users.find(
+      (user) => user.username === userIdRecord
+    );
+
+    console.log(userIdRecord);
+
+    console.log(findUserLoginRecord);
+
+    // const findId = () => {
+    //   if (findUserLoginRecord) {
+
+    //   }
+    // }
+
+    // const updatedData = {
+    //   usernameUpdated: updateProfile.usernameProfile,
+    //   passwordUpdated: updateProfile.passwordProfile,
+    // };
+    // try {
+    //   await updateUsers(updatedData);
+    // } catch (err) {
+    //   console.error(err);
+    // }
   };
 
   if (loading) {
@@ -109,70 +147,6 @@ const AuthProvider = ({ children }) => {
       </>
     );
   }
-
-  const handleRegisterSubmit = async (e) => {
-    e.preventDefault();
-    if (userInput.register.password !== userInput.register.confirmPassword) {
-      setMatchCheck(true);
-      setUserInput((prev) => ({
-        ...prev,
-        register: {
-          email: "",
-          username: "",
-          password: "",
-          confirmPassword: "",
-        },
-      }));
-      setTimeout(() => {
-        setMatchCheck(false);
-      }, 1000);
-    } else {
-      const postData = {
-        email: userInput.register.email,
-        username: userInput.register.username,
-        password: userInput.register.password,
-      };
-      const emailMatch = users.some(
-        (user) => user.email === userInput.register.email
-      );
-      setUserInput((prev) => ({
-        ...prev,
-        register: {
-          email: "",
-          username: "",
-          password: "",
-          confirmPassword: "",
-        },
-      }));
-      if (!emailMatch) {
-        setMessage(true);
-        setMessageAfterLogin(true);
-        setFillMessage(false);
-        setIconForAuth(true);
-        try {
-          const newUser = await postUsers(postData);
-          setUsers((prev) => [...prev, newUser]);
-
-          setTimeout(() => {
-            setMessage(false);
-            navigate("/");
-          }, 500);
-        } catch (error) {
-          console.error(error);
-        }
-      } else {
-        setMessage(true);
-        setMessageAfterLogin(false);
-        setFillMessage(false);
-        setIconForAuth(false);
-        setTimeout(() => {
-          setMessage(false);
-        }, 1000);
-      }
-    }
-  };
-
-  const handleUpdateProfile = () => {};
 
   if (error) {
     return <h1>{error}</h1>;
@@ -193,10 +167,13 @@ const AuthProvider = ({ children }) => {
         iconForAuth,
         fillMessage,
         handleLoginSubmit,
-        handleRegisterSubmit,
-        handleUpdateProfile,
+        handleUpdateProfileSubmit,
         matchCheck,
         setMatchCheck,
+        setMessage,
+        setMessageAfterLogin,
+        setFillMessage,
+        setIconForAuth,
       }}>
       {children}
     </AuthContext.Provider>
