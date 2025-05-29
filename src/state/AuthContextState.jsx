@@ -172,6 +172,8 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const handleUpdateProfile = () => {};
+
   if (error) {
     return <h1>{error}</h1>;
   }
@@ -192,6 +194,7 @@ const AuthProvider = ({ children }) => {
         fillMessage,
         handleLoginSubmit,
         handleRegisterSubmit,
+        handleUpdateProfile,
         matchCheck,
         setMatchCheck,
       }}>

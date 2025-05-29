@@ -28,7 +28,10 @@ const ProfilePage = () => {
                 </p>
               </div>
             </div>
-            <form className='flex flex-col gap-8 items-start'>
+            <form
+              className='flex flex-col gap-8 items-start'
+              // onSubmit={handleUpdateProfile}
+            >
               <label
                 htmlFor='usernameProfile'
                 className='w-full flex flex-col border border-outlineBorder rounded-lg text-sm md:text-base px-4 py-2 bg-paperBackground text-light-disabled'>
